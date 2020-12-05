@@ -1,0 +1,46 @@
+{
+  "name": "v3",
+  "description": "Este projeto foi feito na Moka",
+  "version": "0.0.1",
+  "author": "Moa Torres (https://github.com/moatorres)",
+  "license": "UNLICENSED",
+  "scripts": {
+    "prestart": "npm run -s build",
+    "start": "node dist/index.js",
+    "start:dev": "npm run clean && npm run start",
+    "dev": "nodemon --exec babel-node src/index.js",
+    "clean": "rimraf dist",
+    "build": "npm run clean && mkdir -p dist && babel src -s -D -d dist"
+  },
+  "keywords": [],
+  "dependencies": {
+    "@babel/preset-env": "^7.12.7",
+    "app-root-path": "^3.0.0",
+    "bcryptjs": "^2.4.3",
+    "chalk": "^4.1.0",
+    "concurrently": "^5.3.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "date-fns": "^2.16.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.0.1",
+    "express-rate-limit": "^5.2.3",
+    "helmet": "^4.2.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.4",
+    "multer": "^1.4.2",
+    "nanoid": "^3.1.20",
+    "winston": "^3.3.3",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/node": "^7.12.6",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.6",
+    "rimraf": "^3.0.2"
+  }
+}

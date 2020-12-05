@@ -1,0 +1,16 @@
+{
+  "name": "v0",
+  "description": "Este projeto foi feito na Moka",
+  "version": "0.0.1",
+  "author": "Moa Torres (https://github.com/moatorres)",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.4"
+  },
+  "devDependencies": {}
+}
