@@ -1,33 +1,31 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+
 const Schema = mongoose.Schema
 const Model = mongoose.model
 
-const roupaSchema = new Schema(
+const userSchema = new Schema(
   {
-    sku: String,
-    fabricante: String,
-    tamanho: String,
-    estampa: String,
-    emEstoque: Number,
-    preco: Number,
+    nome: String,
+    email: String,
+    senha: String,
   },
   {
-    collection: 'roupas',
+    collection: 'users',
   }
 )
 
-roupaSchema.index({ sku: 1 }, { unique: true })
+userSchema.index({ email: 1, unique: true }, { name: 'UserEmailIndex' })
 
-roupaSchema.pre(/^find/, function (next) {
+userSchema.pre(/^find/, function (next) {
   this.inicio = Date.now()
   next()
 })
 
-roupaSchema.post(/^find/, function (docs, next) {
-  console.log(`READ Roupa ${Date.now() - this.inicio}ms`)
+userSchema.post(/^find/, function (docs, next) {
+  console.log(`READ User ${Date.now() - this.inicio}ms`)
   next()
 })
 
-const Roupa = Model('Roupa', roupaSchema)
+const User = Model('User', userSchema)
 
-module.exports = Roupa
+export default User

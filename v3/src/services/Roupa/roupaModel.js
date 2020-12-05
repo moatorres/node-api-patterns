@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+
 const Schema = mongoose.Schema
 const Model = mongoose.model
 
@@ -16,7 +17,7 @@ const roupaSchema = new Schema(
   }
 )
 
-roupaSchema.index({ sku: 1 }, { unique: true })
+roupaSchema.index({ sku: 1, unique: true }, { name: 'RoupaSKUIndex' })
 
 roupaSchema.pre(/^find/, function (next) {
   this.inicio = Date.now()
@@ -30,4 +31,4 @@ roupaSchema.post(/^find/, function (docs, next) {
 
 const Roupa = Model('Roupa', roupaSchema)
 
-module.exports = Roupa
+export default Roupa
