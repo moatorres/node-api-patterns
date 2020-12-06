@@ -7,6 +7,7 @@ roteador.route('/').get(controle.getRoupas).post(controle.adicionarRoupa)
 roteador
   .route('/:id')
   .get(controle.getRoupaPorId)
+  .post(controle.adicionarRoupa)
   .patch(controle.atualizarRoupa)
   .delete(controle.removerRoupa)
 
