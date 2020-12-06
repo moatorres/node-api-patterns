@@ -1,27 +1,27 @@
 import gerarUser from '../domain'
 
-export default function criarEditarUser({ UserRepo }) {
-  return async function editarUser({ id, ...changes } = {}) {
+export default function criarEditarUseCase({ UserRepo }) {
+  return async function editarUser({ id, ...updates } = {}) {
     if (!id) {
       throw new Error('Você deve informar uma ID')
     }
 
-    const existente = await UserRepo.findById({ id })
+    const existente = await UserRepo.getPorId({ id: id })
 
-    if (!existente) {
+    if (!existente.sucesso) {
       throw new RangeError('Usuário não encontrado')
     }
 
-    const user = gerarUser({ ...existente, ...changes })
+    const user = gerarUser({ ...existente, ...updates })
 
     // const validado = await handleModeration({ user })
     const validado = user
 
-    const atualizado = await UserRepo.update({
-      id: validado.getId(),
+    const atualizado = await UserRepo.atualizar({
+      id: id,
       nome: validado.getNome(),
       email: validado.getEmail(),
-      ativo: validado.estaAtivo(),
+      senha: validado.getSenha(),
     })
 
     return {

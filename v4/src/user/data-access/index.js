@@ -1,29 +1,19 @@
-const uri = process.env.DB_URI
-const senha = process.env.DB_PASS
-const dbName = process.env.DB_NAME
+import mongoose from 'mongoose'
+import criarRepositorio from './repositorio'
+import ConexaoDB from './db'
+import User from '../domain/model'
 
-export default class ConexaoDB {
-  constructor(driver) {
-    this.driver = driver
-    this.url = Object.freeze(
-      uri.replace('<PASSWORD>', senha).replace('<DB-NAME>', dbName)
-    )
-  }
+const db = new ConexaoDB(mongoose)
 
-  async conectar() {
-    return await this.driver
-      .connect(this.url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
-      })
-      .then(() => console.log(`🗂  moka :: banco de dados conectado`))
-  }
+db.conectar()
 
-  async desconectar() {
-    return await this.driver
-      .disconnect()
-      .then(() => console.log(`🗂  moka :: banco de dados desconectado`))
+export async function handleConnection() {
+  if (!db.status()) {
+    await db.conectar()
   }
+  return db.status()
 }
+
+const userRepo = criarRepositorio({ Model: User })
+
+export default userRepo

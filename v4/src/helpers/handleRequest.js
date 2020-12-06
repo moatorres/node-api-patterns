@@ -16,6 +16,8 @@ export default function handleRequest(controller) {
       cookies: req.cookies,
     }
 
+    // console.log(httpRequest)
+
     controller(httpRequest)
       .then((httpResponse) => {
         if (httpResponse.headers) {
@@ -24,6 +26,9 @@ export default function handleRequest(controller) {
         res.type('json')
         res.status(httpResponse.statusCode).send(httpResponse.body)
       })
-      .catch((e) => res.status(500).send({ erro: '❌ Erro desconhecido.' }))
+      .catch((e) => {
+        res.status(500).send({ erro: '❌ Erro desconhecido.' })
+        console.error(e)
+      })
   }
 }

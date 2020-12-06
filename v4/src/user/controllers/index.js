@@ -1,22 +1,28 @@
-import { addUser, editUser, listUsers, removeUser } from '../use-cases'
-import criarDeleteUser from './delete-user'
-import criarGetUsers from './get-users'
-import criarPostUser from './post-user'
-import criarPatchUser from './patch-user'
-import notFound from './not-found'
+import { adicionarUser, editarUser, getUsers, removerUser } from '../use-cases'
+import criarDeleteController from './DELETE'
+import criarGetController from './GET'
+import criarPostController from './POST'
+import criarPatchController from './PATCH'
+import notFound from './404'
 
-const deleteUser = criarDeleteUser({ removeUser })
-const getUsers = criarGetUsers({ listUsers })
-const postUser = criarPostUser({ addUser })
-const patchUser = criarPatchUser({ editUser })
+const getController = criarGetController({ getUsers })
+const postController = criarPostController({ adicionarUser })
+const patchController = criarPatchController({ editarUser })
+const deleteController = criarDeleteController({ removerUser })
 
 const userController = Object.freeze({
-  deleteUser,
-  getUsers,
+  getController,
+  postController,
+  patchController,
+  deleteController,
   notFound,
-  postUser,
-  patchUser,
 })
 
 export default userController
-export { deleteUser, getUsers, notFound, postUser, patchUser }
+export {
+  getController,
+  postController,
+  patchController,
+  deleteController,
+  notFound,
+}

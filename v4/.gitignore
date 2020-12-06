@@ -1,5 +1,6 @@
 # OS Junk
 .DS_Store
+notas.md
 
 # Logs
 logs
@@ -39,7 +40,6 @@ bower_components
 dist
 public
 *.zip
-
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release

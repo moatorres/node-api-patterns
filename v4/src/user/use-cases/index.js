@@ -1,20 +1,20 @@
-import criarAddComent from './add-user'
-import criarEditUser from './edit-user'
-import criarRemoveUser from './remove-user'
-import criarListUsers from './list-users'
+import criarAdicionarUseCase from './adicionar-user'
+import criarEditarUseCase from './editar-user'
+import criarRemoverUseCase from './remover-user'
+import criarGetUseCase from './listar-users'
 import UserRepo from '../data-access'
 
-const addUser = criarAddComent({ UserRepo })
-const editUser = criarEditUser({ UserRepo })
-const listUsers = criarListUsers({ UserRepo })
-const removeUser = criarRemoveUser({ UserRepo })
+const adicionarUser = criarAdicionarUseCase({ UserRepo })
+const editarUser = criarEditarUseCase({ UserRepo })
+const getUsers = criarGetUseCase({ UserRepo })
+const removerUser = criarRemoverUseCase({ UserRepo })
 
 const userService = Object.freeze({
-  addUser,
-  editUser,
-  listUsers,
-  removeUser,
+  adicionarUser,
+  editarUser,
+  getUsers,
+  removerUser,
 })
 
 export default userService
-export { addUser, editUser, listUsers, removeUser }
+export { adicionarUser, editarUser, getUsers, removerUser }

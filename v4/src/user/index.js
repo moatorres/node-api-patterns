@@ -1,20 +1,19 @@
 import express from 'express'
 import controle from './controllers'
-import handleRequest from '../express-callback'
+import handleRequest from '../helpers/handleRequest'
 
 const roteador = express.Router()
 
 roteador
   .route('/')
-  .get(handleRequest(controle.getUsers))
-  .post(handleRequest(controle.postUser))
-  .patch(handleRequest(controle.patchUser))
-  .delete(handleRequest(controle.deleteUser))
+  .get(handleRequest(controle.getController))
+  .post(handleRequest(controle.postController))
 
 roteador
   .route('/:id')
-  .delete(handleRequest(controle.deleteUser))
-  .patch(handleRequest(controle.patchUser))
+  .get(handleRequest(controle.getController))
+  .delete(handleRequest(controle.deleteController))
+  .patch(handleRequest(controle.patchController))
 
 roteador.use(handleRequest(controle.notFound))
 

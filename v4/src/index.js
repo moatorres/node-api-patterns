@@ -1,28 +1,20 @@
 import express from 'express'
-import bodyParser from 'body-parser'
-import dotenv from 'dotenv'
+import { apiRoot } from './config'
+import morgan from 'morgan'
 import userHandler from './user'
-import notFound from './user/use-cases'
-import handleRequest from './express-callback'
 
-dotenv.config()
-
-const apiRoot = process.env.API_URL
 const app = express()
 
-app.use(bodyParser.json())
+app.use(express.json())
 
-app.use((_, res, next) => {
-  res.set({ Tk: '!' })
-  next()
-})
+if (process.env.NODE_ENV !== 'production') {
+  app.use(morgan('dev'))
+}
 
-app.use(`${apiRoot}/user`, userHandler)
-
-app.use(handleRequest(notFound))
+app.use('/user', userHandler)
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`Servidor rodando em ${apiRoot}`)
+  console.log(`🗂  moka :: servidor rodando em ${apiRoot}`)
 })
 
 export default app
